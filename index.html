@@ -33,43 +33,6 @@ $(window).load(function(){
 	var sketch = atrament("#obraz");
 }
 
-var getit = document.getElementById("getit");
-getit.onclick = function(){
-	var name = document.getElementById("name").value;
-   if(name == "") name = "sample"
-	 var obr = obraz.toDataURL();
-   download(obr, name + ".png","image/png")
-}
-
-var cleanit = document.getElementById("cleanit");
-cleanit.onclick = function(){
-
-}
-
-var setit = document.getElementById("setit");
-setit.onclick = function(){
-	var ps = document.getElementById("size").value;
-	var pk = document.getElementById("color").value;
-	if(ps != "" && parseInt(ps) != NaN){
-		
-	}
-	if(pk != ""){
-		
-	}
-}
-
-var saveit = document.getElementById("saveit");
-saveit.onclick = function(){
-	;
-}
-
-var restoreit = document.getElementById("restoreit");
-restoreit.onclick = function(){
-
-}
-
-});
-
 </script>
 </head>
 <body>
