@@ -8,7 +8,7 @@
   
   <script type="text/javascript" src="//code.jquery.com/jquery-1.9.1.js"></script>
       <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/downloadjs/1.4.7/download.min.js"></script>
-	  
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/atrament.js/0.3.1/atrament.min.js"></script>  
   <style type="text/css">
     #obraz{
   margin-left: 30px;
@@ -30,57 +30,7 @@ h1,h4{
 
 <script type="text/javascript">
 $(window).load(function(){
-
-var obraz = document.getElementById("obraz");
-var ctx = obraz.getContext("2d");
-ctx.fillStyle = "white";
-ctx.fillRect(0, 0, obraz.width, obraz.height);
-var mouseDown = false;
-var touchDown = false;
-var pioro_kolor = "black";
-var pioro_rozmiar = 3;
-
-
-obraz.onmousedown = function(){
-	mouseDown = true;
-}
-obraz.onmouseup = function(){
-	mouseDown = false;
-}
-obraz.onmousemove = function(evt){
-	if(mouseDown){
-		 var rect = obraz.getBoundingClientRect(), 
-		 scaleX = obraz.width / rect.width,    
-		 scaleY = obraz.height / rect.height;  
-		 var x  = (evt.clientX - rect.left) * scaleX;   
-		 var y  = (evt.clientY - rect.top) * scaleY;
-		ctx.beginPath();
-		ctx.arc(x,y, pioro_rozmiar, 0, 2*Math.PI);
-		ctx.fillStyle = pioro_kolor;
-		ctx.fill();
-	}
-}
-
-obraz.ontouchstart = function(){
-	touchDown = true;
-}
-
-obraz.ontouchend = function(){
-	touchDown = false;
-}
-
-obraz.ontouchmove = function(evt){
-	if(touchDown){
-		 var rect = obraz.getBoundingClientRect(), 
-		 scaleX = obraz.width / rect.width,    
-		 scaleY = obraz.height / rect.height;  
-		 var x  = (evt.touches[0].screenX - rect.left) * scaleX;   
-		 var y  = (evt.touches[0].screenY - rect.top) * scaleY;
-		ctx.beginPath();
-		ctx.arc(x,y, pioro_rozmiar, 0, 2*Math.PI);
-		ctx.fillStyle = pioro_kolor;
-		ctx.fill();
-	}
+	var sketch = atrament("#obraz");
 }
 
 var getit = document.getElementById("getit");
@@ -93,8 +43,7 @@ getit.onclick = function(){
 
 var cleanit = document.getElementById("cleanit");
 cleanit.onclick = function(){
-ctx.fillStyle = "white";
-ctx.fillRect(0, 0, obraz.width, obraz.height);
+
 }
 
 var setit = document.getElementById("setit");
@@ -102,25 +51,21 @@ setit.onclick = function(){
 	var ps = document.getElementById("size").value;
 	var pk = document.getElementById("color").value;
 	if(ps != "" && parseInt(ps) != NaN){
-		pioro_rozmiar = ps;
+		
 	}
 	if(pk != ""){
-		pioro_kolor = pk;
+		
 	}
 }
 
 var saveit = document.getElementById("saveit");
 saveit.onclick = function(){
-	localStorage.image = obraz.toDataURL();
+	;
 }
 
 var restoreit = document.getElementById("restoreit");
 restoreit.onclick = function(){
-	var img = new Image();
-	img.onload = function(){
-		ctx.drawImage(img,0,0);
-	}
-	img.src = localStorage.image;
+
 }
 
 });
